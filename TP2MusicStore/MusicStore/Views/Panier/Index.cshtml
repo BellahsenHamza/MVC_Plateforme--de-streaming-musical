@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MusicStore.Models.DataModels.Album>
+
+@{
+    ViewBag.Title = "Panier";
+}
+
+<h2>Panier</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cover)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnneeParution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Artiste)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prix)
+        </th>
+
+        <th></th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <img src="@item.Cover" style="max-height:50px;max-width:50px;" class="img-rounded" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnneeParution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Artiste)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prix)
+        </td>
+        <td>
+        <a href="/Panier/SupprimerUnArticle?AlbumId=@item.AlbumId" class="btn btn-danger">Supprimer l'article du panier</a>
+        </td>
+
+    </tr>
+
+    }
+    <tr>
+        <td>TOTAL:</td>
+        <td>$@ViewBag.Total</td>
+    </tr>
+    <tr>
+        <td><a class="btn btn-danger" href="/Panier/ViderPanier">Vider le panier</a></td>
+    </tr>
+</table>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MusicStore.Models.DataModels.Genre>
+
+@{
+    ViewBag.Title = "Genre";
+}
+
+<h2>Genre</h2>
+
+<a class="btn btn-success" href="/Genre/Create">Créer un nouveau Genre</a>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit",routeValues: new { id=item.GenreId }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete",routeValues: new { id=item.GenreId }, htmlAttributes: new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

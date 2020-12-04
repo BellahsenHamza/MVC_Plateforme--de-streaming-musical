@@ -1,0 +1,28 @@
+﻿@model MusicStore.Models.DataModels.Album
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Voulez-vous vraiment supprimer " + Html.DisplayFor(model => model.Titre);
+}
+
+
+<h2>
+    Voulez-vous vraiment supprimer  @Html.DisplayFor(model => model.Titre)
+</h2>
+<div>
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(t => t.AlbumId)
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-default" href="/Album">Retour à la liste</a>
+    </div>
+}

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MusicStore.Models.DataModels.Album>
+@using MusicStore.Models.DataModels
+@using MusicStore.Models.DAL
+@using MusicStore.Models
+
+@{
+    ViewBag.Title = "Albums";
+}
+
+<h2>Albums</h2>
+@{
+    Depot depot = new Depot();
+    List<Genre> la = depot.Genres.List();
+}
+<div class="well well-sm">
+    <form class="form-inline" action="/Album/Index" method="get">
+        <div class="form-group">
+            <label>
+                Titre:
+                <input type="text" class="form-control" id="filtreTitre" name="FiltreTitre" value="@ViewBag.filtreTitre" placeholder="Entrez une partie du titre">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Artiste:
+                <input type="text" class="form-control" id="filtreArtiste" name="FiltreArtiste" value="@ViewBag.filtreArtiste" placeholder="Entrez une partie du nom de l'artiste">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Genre:
+                @Html.DropDownList("FiltreGenre",new SelectList(la,"GenreId","Nom", selectedValue: ViewBag.filtreGenre),optionLabel:"", htmlAttributes: new { @class = "form-control" })
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-success" href="/Album/Create">Créer un nouvel album</a>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-3">
+            <div class="text-center">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/Album/Edit?id=@item.AlbumId">
+                            <h4>
+                                @Html.DisplayFor(modelItem => item.Titre)
+                            </h4>
+                        </a>
+
+                        <h5>
+                            @Html.DisplayFor(modelItem => item.Artiste)
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <a href="/Album/Edit?id=@item.AlbumId">
+                                <img src="@item.Cover"  alt=@Html.DisplayFor(modelItem => item.Titre) class="img-rounded" style="max-height:200px;max-width:200px">
+                            </a>
+                        </p>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Prix)
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-primary" href="/Album/Edit?id=@item.AlbumId">Edit</a>
+                        <a class="btn btn-danger" href="/Album/Delete?id=@item.AlbumId">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

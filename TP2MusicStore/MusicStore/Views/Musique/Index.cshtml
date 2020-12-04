@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MusicStore.Models.DataModels.Album>
+
+@{
+    ViewBag.Title = "Musique";
+}
+
+<h2>Liste des albums</h2>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-3">
+            <div class="text-center">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>@Html.DisplayFor(modelItem => item.Titre)</h4>
+
+                        <h5>@Html.DisplayFor(modelItem => item.Artiste)</h5>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <img src=@Html.DisplayFor(modelItem => item.Cover) alt=@Html.DisplayFor(modelItem => item.Titre) class="img-rounded" style="max-height:200px;max-width:200px">
+                        </p>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Prix)
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-primary" href="/Panier/Ajouter?AlbumId=@item.AlbumId">Acheter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

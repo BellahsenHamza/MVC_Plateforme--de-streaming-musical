@@ -1,0 +1,36 @@
+﻿@model MusicStore.Models.DataModels.Genre
+
+@{
+    ViewBag.Title = "Suprimer "+ Html.DisplayNameFor(model => model.Nom);
+}
+
+<h2>Delete</h2>
+
+<h3>
+    Voulez-vous supprimer le genre @Html.DisplayNameFor(model => model.Nom)
+</h3>
+<div>
+    <h4>Genre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(t => t.GenreId)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
